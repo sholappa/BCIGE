@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sholappa/BCGE.git"
+    "url": "git+https://github.com/sholappa/BCIGE.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sholappa/BCGE/issues"
+    "url": "https://github.com/sholappa/BCIGE/issues"
   },
-  "homepage": "https://github.com/sholappa/BCGE#readme",
+  "homepage": "https://github.com/sholappa/BCIGE#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
@@ -28,5 +28,8 @@
     "passport-http": "^0.3.0",
     "passport-jwt": "^4.0.0",
     "uuid": "^8.3.2"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
