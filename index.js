@@ -8,6 +8,8 @@ const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const app = express()
 const port = 3000
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/'})
 
 app.use(bodyParser.json());
 
@@ -97,7 +99,6 @@ app.get('/jwtSecured', passport.authenticate('jwt', {session: false}), (req, res
 res.json({ status: "ok", user: req.user.username});
 })
 //JWT
-
 app.post('/users', (req, res) => {
     
     console.log('POST user');
@@ -186,3 +187,11 @@ app.put('/items/:itemId', (req, res) => {
         }
     
     });
+
+    app.post('/photos/upload', upload.array('images', 12), function (req, res, next) {
+
+    console.log(req.files);
+        
+    
+    res.sendStatus(200)
+    })
