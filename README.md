@@ -1,4 +1,4 @@
-# BCGE
+# BCIGE
 BciGradedExercise
 
 
