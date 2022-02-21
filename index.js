@@ -14,6 +14,11 @@ const upload = multer({ dest: 'uploads/'})
 app.get('/', function(req, res) {
     res.send("Api");
 });
+app.set('port', (process.env.PORT || 80));
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
+
 app.use(bodyParser.json());
 
 passport.use(new BasicStrategy(
@@ -30,11 +35,7 @@ passport.use(new BasicStrategy(
     }
 ));
 
-//heroku
-app.set('port', (process.env.PORT || 80));
-app.listen(app.get('port'), function() {
-    console.log('Node app is running on port', app.get('port'));
-});
+
 
 const users = [{
     "id": uuidv4(),
