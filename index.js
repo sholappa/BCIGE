@@ -7,12 +7,24 @@ const res = require('express/lib/response')
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const app = express()
-const port = 3000
+//const port = 3000
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/'})
+var cloudinary = require('cloudinary').v2;
+var { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 app.use(bodyParser.json());
+//cloudinary
+// Config cloudinary storage for multer-storage-cloudinary
+var storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: ''
+    },
+  });
 
+  
+var parser = multer({ storage: storage });
 
 passport.use(new BasicStrategy(
     function(username, password, done) {
@@ -28,10 +40,14 @@ passport.use(new BasicStrategy(
     }
 ));
 
+//heroku
+app.set('port', (process.env.PORT || 80));
+
 //app to run localhost
-app.listen(port, () => {
-    console.log('app running on port 3000')
-})
+//app.listen(port, () => {
+ //   console.log('app running on port 3000')
+//})
+
 const users = [{
     "id": uuidv4(),
     "firstName": "string",
