@@ -35,8 +35,6 @@ passport.use(new BasicStrategy(
     }
 ));
 
-
-
 const users = [{
     "id": uuidv4(),
     "firstName": "string",
@@ -82,7 +80,7 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
     const user = users.find(u => u.id === jwt_payload.UserId)
     done(null, user);
 }));
-
+//Login
 app.post('/login',passport.authenticate('basic', {session: false}), (req, res) => {
     //jwt generointi
     const payloadData = {
@@ -98,9 +96,7 @@ app.post('/login',passport.authenticate('basic', {session: false}), (req, res) =
 
   
 })
-
 app.get('/jwtSecured', passport.authenticate('jwt', {session: false}), (req, res) => {
-
 res.json({ status: "ok", user: req.user.username});
 })
 //JWT
