@@ -7,26 +7,14 @@ const res = require('express/lib/response')
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const app = express()
-//const port = 3000
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/'})
-var cloudinary = require('cloudinary').v2;
-var { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+
 app.get('/', function(req, res) {
     res.send("Api");
 });
-
-
 app.use(bodyParser.json());
-// Config cloudinary storage for multer-storage-cloudinary
-var storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-      folder: ''
-    },
-  });
-  
-var parser = multer({ storage: storage });
 
 passport.use(new BasicStrategy(
     function(username, password, done) {
@@ -44,15 +32,9 @@ passport.use(new BasicStrategy(
 
 //heroku
 app.set('port', (process.env.PORT || 80));
-
-
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
-//app to run localhost
-//app.listen(port, () => {
- //   console.log('app running on port 3000')
-//})
 
 const users = [{
     "id": uuidv4(),
@@ -117,7 +99,7 @@ app.post('/login',passport.authenticate('basic', {session: false}), (req, res) =
 })
 
 app.get('/jwtSecured', passport.authenticate('jwt', {session: false}), (req, res) => {
-    
+
 res.json({ status: "ok", user: req.user.username});
 })
 //JWT
@@ -170,7 +152,6 @@ app.delete('/items/:itemId',passport.authenticate('jwt', { session: false }), (r
             res.sendStatus(200)
     }  
 })
-
 
 
 app.post('/items', passport.authenticate('jwt', { session: false }), (req, res) => {
