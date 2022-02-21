@@ -14,7 +14,6 @@ var cloudinary = require('cloudinary').v2;
 var { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 app.use(bodyParser.json());
-//cloudinary
 // Config cloudinary storage for multer-storage-cloudinary
 var storage = new CloudinaryStorage({
     cloudinary: cloudinary,
@@ -22,7 +21,6 @@ var storage = new CloudinaryStorage({
       folder: ''
     },
   });
-
   
 var parser = multer({ storage: storage });
 
@@ -43,6 +41,10 @@ passport.use(new BasicStrategy(
 //heroku
 app.set('port', (process.env.PORT || 80));
 
+
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
 //app to run localhost
 //app.listen(port, () => {
  //   console.log('app running on port 3000')
@@ -154,7 +156,7 @@ app.get('/items', (req, res) => {
 
 
 
-app.delete('/items/:itemId', (req, res) => {
+app.delete('/items/:itemId',passport.authenticate('jwt', { session: false }), (req, res) => {
     let foundIndex = items.findIndex(t => t.Id === req.params.itemId);
 
     if(foundIndex === -1){
@@ -167,7 +169,7 @@ app.delete('/items/:itemId', (req, res) => {
 
 
 
-app.post('/items', (req, res) => {
+app.post('/items', passport.authenticate('jwt', { session: false }), (req, res) => {
     console.log(req.body);
 
 
@@ -185,7 +187,7 @@ app.post('/items', (req, res) => {
     res.sendStatus(201);
 })
 
-app.put('/items/:itemId', (req, res) => {
+app.put('/items/:itemId', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     let foundItem = items.find(t => t.Id === req.params.itemId);
     if(foundItem){
@@ -204,7 +206,7 @@ app.put('/items/:itemId', (req, res) => {
     
     });
 
-    app.post('/photos/upload', upload.array('images', 12), function (req, res, next) {
+    app.post('/photos/upload', upload.array('images', 12), passport.authenticate('jwt', { session: false }), function (req, res, next) {
 
     console.log(req.files);
         
