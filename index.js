@@ -12,6 +12,10 @@ const multer = require('multer')
 const upload = multer({ dest: 'uploads/'})
 var cloudinary = require('cloudinary').v2;
 var { CloudinaryStorage } = require('multer-storage-cloudinary');
+app.get('/', function(req, res) {
+    res.send("Api");
+});
+
 
 app.use(bodyParser.json());
 // Config cloudinary storage for multer-storage-cloudinary
