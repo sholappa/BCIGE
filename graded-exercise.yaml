@@ -1,0 +1,610 @@
+openapi: 3.1.0
+info:
+  title: graded exercise
+  version: '1.0'
+  summary: Onlineshop api
+  description: Onlineshop api
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /login:
+    post:
+      summary: PostUserlogin
+      operationId: post-login
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+      description: 'userlogin '
+  /users:
+    post:
+      summary: PostUsers
+      operationId: post-registration
+      responses:
+        '201':
+          description: Created
+          headers: {}
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    id: 0
+                    firstName: string
+                    lastName: string
+                    email: string
+                    dateOfBirth: string
+                properties:
+                  id:
+                    type: number
+                  firstName:
+                    type: string
+                    minLength: 1
+                  lastName:
+                    type: string
+                    minLength: 1
+                  email:
+                    type: string
+                    minLength: 1
+                  dateOfBirth:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - firstName
+                  - lastName
+                  - email
+                  - dateOfBirth
+              examples:
+                example-1:
+                  value:
+                    id: 0
+                    firstName: string
+                    lastName: string
+                    email: string
+                    dateOfBirth: string
+        '400':
+          description: Bad Request
+      description: User registration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                email:
+                  type: string
+                dateOfBirth:
+                  type: string
+    parameters: []
+  '/users{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: GetUsersID
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    id: 142
+                    firstName: Alice
+                    lastName: Smith
+                    email: alice.smith@gmail.com
+                    dateOfBirth: '1997-10-31'
+                    emailVerified: true
+                    signUpDate: '2019-08-24'
+                properties:
+                  id:
+                    type: number
+                  firstName:
+                    type: string
+                    minLength: 1
+                  lastName:
+                    type: string
+                    minLength: 1
+                  email:
+                    type: string
+                    minLength: 1
+                  dateOfBirth:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - firstName
+                  - lastName
+                  - email
+                  - dateOfBirth
+              examples:
+                example-1:
+                  value:
+                    id: 0
+                    firstName: string
+                    lastName: string
+                    email: string
+                    dateOfBirth: string
+      operationId: get-users-userid
+  /items:
+    get:
+      summary: GetItems
+      tags: []
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    title: string
+                    description: string
+                    category: string
+                    location: string
+                    images: null
+                    price: 0
+                    date of posting: string
+                    delivery type: string
+                    UserId: string
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  category:
+                    type: string
+                    minLength: 1
+                  location:
+                    type: string
+                    minLength: 1
+                  images:
+                    $ref: ''
+                  price:
+                    type: number
+                  date of posting:
+                    type: string
+                    minLength: 1
+                  delivery type:
+                    type: string
+                    minLength: 1
+                  UserId:
+                    type: string
+                    minLength: 1
+                required:
+                  - title
+                  - description
+                  - category
+                  - location
+                  - price
+                  - date of posting
+                  - delivery type
+                  - UserId
+        '404':
+          description: Not Found
+      operationId: get-posting
+      description: get posting data
+    post:
+      summary: ''
+      operationId: post-posting
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                x-examples:
+                  example-1:
+                    title: string
+                    description: string
+                    category: string
+                    location: string
+                    images: null
+                    price: 0
+                    date of posting: string
+                    delivery type: string
+                    UserId: string
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  category:
+                    type: string
+                    minLength: 1
+                  location:
+                    type: string
+                    minLength: 1
+                  images:
+                    $ref: ''
+                  price:
+                    type: number
+                  date of posting:
+                    type: string
+                    minLength: 1
+                  delivery type:
+                    type: string
+                    minLength: 1
+                  UserId:
+                    type: string
+                    minLength: 1
+                required:
+                  - title
+                  - description
+                  - category
+                  - location
+                  - price
+                  - date of posting
+                  - delivery type
+                  - UserId
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                description:
+                  type: string
+                  minLength: 1
+                category:
+                  type: string
+                  minLength: 1
+                location:
+                  type: string
+                  minLength: 1
+                images: {}
+                price:
+                  type: number
+                date of posting:
+                  type: string
+                  minLength: 1
+                delivery type:
+                  type: string
+                  minLength: 1
+                UserId:
+                  type: string
+                  minLength: 1
+              required:
+                - title
+                - description
+                - category
+                - location
+                - price
+                - date of posting
+                - delivery type
+                - UserId
+              x-examples:
+                example-1:
+                  title: string
+                  description: string
+                  category: string
+                  location: string
+                  images: null
+                  price: 0
+                  date of posting: string
+                  delivery type: string
+                  UserId: string
+    parameters: []
+  /items/search:
+    parameters: []
+    get:
+      summary: GetItemsSearch
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  category:
+                    type: string
+                    minLength: 1
+                  location:
+                    type: string
+                    minLength: 1
+                  images: {}
+                  price:
+                    type: number
+                  date of posting:
+                    type: string
+                    minLength: 1
+                  delivery type:
+                    type: string
+                    minLength: 1
+                  UserId:
+                    type: string
+                    minLength: 1
+                required:
+                  - title
+                  - description
+                  - category
+                  - location
+                  - price
+                  - date of posting
+                  - delivery type
+                  - UserId
+                x-examples:
+                  example-1:
+                    title: string
+                    description: string
+                    category: string
+                    location: string
+                    images: null
+                    price: 0
+                    date of posting: string
+                    delivery type: string
+                    UserId: string
+              examples:
+                example-1:
+                  value:
+                    title: string
+                    description: string
+                    category: string
+                    location: string
+                    images: null
+                    price: 0
+                    date of posting: string
+                    delivery type: string
+                    UserId: string
+        '404':
+          description: Not Found
+      operationId: get-posting-search
+  '/items/{productId}':
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    get:
+      summary: Get/Put/DeleteItems
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  title:
+                    type: string
+                    minLength: 1
+                  description:
+                    type: string
+                    minLength: 1
+                  category:
+                    type: string
+                    minLength: 1
+                  location:
+                    type: string
+                    minLength: 1
+                  images: {}
+                  price:
+                    type: number
+                  date of posting:
+                    type: string
+                    minLength: 1
+                  delivery type:
+                    type: string
+                    minLength: 1
+                  UserId:
+                    type: string
+                    minLength: 1
+                required:
+                  - title
+                  - description
+                  - category
+                  - location
+                  - price
+                  - date of posting
+                  - delivery type
+                  - UserId
+                x-examples:
+                  example-1:
+                    title: string
+                    description: string
+                    category: string
+                    location: string
+                    images: null
+                    price: 0
+                    date of posting: string
+                    delivery type: string
+                    UserId: string
+        '404':
+          description: Not Found
+      operationId: get-posting-productid
+    put:
+      summary: 'Items/{productId}Put'
+      operationId: put-posting-productid
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+        description: ''
+    delete:
+      summary: ''
+      operationId: delete-posting-productid
+      responses:
+        '200':
+          description: OK
+  /photos:
+    post:
+      summary: PostPhotos
+      operationId: post-photos
+      responses:
+        '200':
+          description: OK
+      description: post photos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                Photos:
+                  type: array
+                  maxItems: 4
+                  items: {}
+            examples:
+              example-1:
+                value: {}
+        description: ''
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      examples:
+        - id: 142
+          firstName: Alice
+          lastName: Smith
+          email: alice.smith@gmail.com
+          dateOfBirth: '1997-10-31'
+          emailVerified: true
+          signUpDate: '2019-08-24'
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1997-10-31'
+        emailVerified:
+          type: boolean
+          description: Set to true if the user's email has been verified.
+        createDate:
+          type: string
+          format: date
+          description: The date that the user was created.
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - emailVerified
+    posting:
+      title: posting
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        location:
+          type: string
+        images:
+          $ref: ''
+        price:
+          type: number
+        date of posting:
+          type: string
+        delivery type:
+          type: string
+        UserId:
+          type: string
+      examples:
+        - title: string
+          description: string
+          category: string
+          location: string
+          images: null
+          price: 0
+          date of posting: string
+          delivery type: string
+          UserId: string
+    posting - copy:
+      title: posting
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        location:
+          type: string
+        images:
+          $ref: ''
+        price:
+          type: number
+        date of posting:
+          type: string
+        delivery type:
+          type: string
+        UserId:
+          type: string
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+    HTTP basic authentication:
+      type: http
+      scheme: basic
+security:
+  - HTTP basic authentication: []
+  - JWT: []
